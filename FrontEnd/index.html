@@ -4,6 +4,7 @@
         <meta charset="UTF-8" />
         <title>Sophie Bluel - Architecte d'intérieur</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://kit.fontawesome.com/c728df9104.js" crossorigin="anonymous"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
@@ -13,6 +14,13 @@
         <link rel="stylesheet" href="./assets/style.css" />
     </head>
     <body>
+        <div class="mode__edition__bar">
+            <span>
+                <i class="fa-regular fa-pen-to-square"></i>
+                Mode édition
+            </span>
+            <button id="publier__button">Publier les changements</button>
+        </div>
         <header>
             <h1>
                 Sophie Bluel
@@ -22,7 +30,9 @@
                 <ul>
                     <li>projets</li>
                     <li>contact</li>
-                    <li>login</li>
+                    <li id="login__button" class="logout__button">
+                        <a href="login.html">login</a>
+                    </li>
                     <li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
                 </ul>
             </nav>
@@ -67,6 +77,40 @@
                     <input type="submit" value="Envoyer" />
                 </form>
             </section>
+            <div id="modal" class="modal">
+                <div class="modal__content">
+                    <span class="close__button">&times;</span>
+                    <h2>Galerie Photo</h2>
+                    <div class="project__list"></div>
+                    <div id="add__photo__form">
+                        <input type="submit" value="Ajouter une photo" />
+                    </div>
+                    <p id="delete__gallery__text">Supprimer la galerie</p>
+                </div>
+            </div>
+            <div id="add__photo__modal" class="modal">
+                <div class="modal__content add__photo__modal__content">
+                    <span class="close__button">&times;</span>
+                    <h2>Ajout photo</h2>
+                    <div class="upload__area">
+                        <div class="upload__rectangle">
+                            <div id="uploaded__image__container"></div>
+                            <input type="file" id="image__input" accept="image/*" style="display: none" />
+                            <label for="image__input" id="upload__label" class="upload__button">+ Ajouter photo</label>
+                            <p id="upload__info">jpg, png : 4mo max</p>
+                        </div>
+                        <form action="#">
+                            <label for="title">Titre</label>
+                            <input type="text" name="title" id="title" />
+                            <label for="categorie">Catégorie</label>
+                            <input type="text" name="categorie" id="categorie" />
+                        </form>
+                        <div id="valider">
+                            <input type="submit" value="Valider" />
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
 
         <footer>

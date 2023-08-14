@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const closeModalButton = document.querySelector(".close__button");
     const addPhotoButtonFirstModal = document.getElementById("add__photo__form");
     const addPhotoModal = document.getElementById("add__photo__modal");
+    const validateProject = document.getElementById("validate__projet");
     const closeModalButtonAddPhotoModal = addPhotoModal.querySelector(".close__button");
     const imageInput = document.getElementById("image__input");
     const uploadLabel = document.getElementById("upload__label");
@@ -240,7 +241,6 @@ document.addEventListener("DOMContentLoaded", () => {
     imageInput.addEventListener("input", (event) => {
         const selectedImage = event.target.files[0];
         if (selectedImage) {
-            console.log("Image sélectionnée :", selectedImage);
             const uploadedImage = document.createElement("img");
             uploadedImage.src = URL.createObjectURL(selectedImage);
             uploadedImage.alt = "Image téléchargée";
@@ -252,16 +252,70 @@ document.addEventListener("DOMContentLoaded", () => {
             uploadedImageContainer.appendChild(uploadedImage);
             const uploadInfo = document.getElementById("upload__info");
             uploadInfo.style.display = "none";
+            uploadLabel.style.display = "none";
 
             // Affichez le conteneur de l'image
             uploadedImageContainer.style.display = "block";
-            imageInput.value = null;
-        } else {
-            // Si aucun fichier n'est sélectionné, cachez le conteneur de l'image
-            uploadedImageContainer.style.display = "none";
         }
-        // Réinitialiser l'élément d'entrée de fichier pour permettre de choisir d'autres images
     });
+
+    validateProject.addEventListener("click", async () => {
+        const title = document.getElementById("title").value;
+        const categoryId = document.getElementById("categorie").value;
+        const selectedImage = imageInput.files[0];
+
+        const projectData = new FormData();
+        projectData.append("title", title);
+        projectData.append("image", selectedImage);
+        projectData.append("category", categoryId);
+
+        console.log(projectData.get("title"));
+        console.log(projectData.get("image"));
+        console.log(projectData.get("category"));
+
+        try {
+            const response = await fetch("http://localhost:5678/api/works", {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+                body: projectData,
+            });
+
+            if (!response.ok) {
+                throw new Error("Erreur lors de l'ajout du projet");
+            }
+
+            addPhotoModal.style.display = "none";
+        } catch (error) {
+            console.error("Erreur : ", error);
+        }
+    });
+
+    async function fillCategoryOptions() {
+        try {
+            // Fetch les catégories depuis l'API
+            const response = await fetch("http://localhost:5678/api/categories");
+            if (!response.ok) {
+                throw new Error("Erreur lors de la récupération des catégories");
+            }
+            const categories = await response.json();
+
+            const categorieSelect = document.getElementById("categorie");
+
+            categories.forEach((category) => {
+                const option = document.createElement("option");
+                option.value = category.id;
+                option.textContent = category.name;
+                categorieSelect.appendChild(option);
+            });
+        } catch (error) {
+            console.error("Erreur lors de la récupération des catégories :", error);
+        }
+    }
+    // Appelle fillCategoryOptions pour ajouter les catégories dans le menu déroulant
+    fillCategoryOptions();
+
     // Appelle setActiveFilter avec "Tous" pour initialiser la galerie avec tous les projets au démarrage
     setActiveFilter("Tous");
 

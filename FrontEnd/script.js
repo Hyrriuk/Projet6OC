@@ -4,21 +4,21 @@ document.addEventListener("DOMContentLoaded", () => {
     const token = window.localStorage.getItem("token");
     const modeAdmin = document.querySelector(".mode__edition__bar");
     const loginButton = document.getElementById("login__button");
-    const publierButton = document.getElementById("publier__button");
+    const publierButton = document.getElementById("modifier__button");
     const modal = document.getElementById("modal");
     const closeModalButton = document.querySelector(".close__button");
     const addPhotoButtonFirstModal = document.getElementById("add__photo__form");
     const addPhotoModal = document.getElementById("add__photo__modal");
-    const validateProject = document.getElementById("validate__projet");
+    const validateProject = document.getElementById("validate__project");
     const closeModalButtonAddPhotoModal = addPhotoModal.querySelector(".close__button");
     const imageInput = document.getElementById("image__input");
+    const uploadIcon = document.querySelector(".uploaded__image__container__icon");
     const uploadLabel = document.getElementById("upload__label");
+    const uploadInfo = document.getElementById("upload__info");
     const uploadedImageContainer = document.getElementById("uploaded__image__container");
-    let newlyAddedProject;
 
     // Variable pour stocker le filtre actif, initialise avec "Tous"
     let activeFilter = "Tous";
-
     // Fonction pour récupérer les projets de l'architecte depuis l'API
     async function fetchProjects() {
         try {
@@ -250,9 +250,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Ajoutez l'image téléchargée au conteneur
             uploadedImageContainer.appendChild(uploadedImage);
-            const uploadInfo = document.getElementById("upload__info");
-            uploadInfo.style.display = "none";
+            uploadIcon.style.display = "none";
             uploadLabel.style.display = "none";
+            uploadInfo.style.display = "none";
 
             // Affichez le conteneur de l'image
             uploadedImageContainer.style.display = "block";
@@ -268,10 +268,6 @@ document.addEventListener("DOMContentLoaded", () => {
         projectData.append("title", title);
         projectData.append("image", selectedImage);
         projectData.append("category", categoryId);
-
-        console.log(projectData.get("title"));
-        console.log(projectData.get("image"));
-        console.log(projectData.get("category"));
 
         try {
             const response = await fetch("http://localhost:5678/api/works", {
@@ -313,6 +309,19 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Erreur lors de la récupération des catégories :", error);
         }
     }
+
+    window.addEventListener("click", (event) => {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+
+        console.log(event.target);
+
+        if (event.target === addPhotoModal) {
+            addPhotoModal.style.display = "none";
+        }
+    });
+
     // Appelle fillCategoryOptions pour ajouter les catégories dans le menu déroulant
     fillCategoryOptions();
 

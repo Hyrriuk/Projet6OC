@@ -202,7 +202,14 @@ li:hover {
 }
 #portfolio h2 {
     text-align: center;
+    margin-right: 30px;
+}
+.portfolio__title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 1em;
+    cursor: pointer;
 }
 .gallery {
     width: 100%;
@@ -477,15 +484,25 @@ a {
     background-color: rgba(0, 0, 0, 0.4);
 }
 
+.fa-image {
+    height: 58px;
+    width: 58px;
+    font-size: 100px;
+    color: #b9c5cc;
+}
+.uploaded__image__container__icon {
+    position: relative;
+    margin-bottom: 20px;
+    left: -15px;
+}
+
 #add__photo__modal form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
     border-bottom: solid #b3b3b3;
-    padding-bottom: 47px;
-    padding-top: 47px;
+    padding-bottom: 40px;
+    padding-top: 40px;
 }
 
 #add__photo__modal label {
@@ -495,7 +512,7 @@ a {
 #add__photo__modal input {
     width: 379px;
     height: 51px;
-    margin: 5px 0;
+    margin: 10px 0;
     padding: 5px;
     font-size: 1em;
     border: none;
@@ -505,7 +522,7 @@ a {
 #add__photo__modal select {
     width: 379px;
     height: 51px;
-    margin: 5px 0;
+    margin: 10px 0;
     padding: 5px;
     font-size: 1em;
     border: none;
@@ -565,6 +582,12 @@ a {
 }
 
 #valider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#validate__project {
     display: flex;
     justify-content: center;
     align-items: center;

@@ -60,7 +60,13 @@
                 </article>
             </section>
             <section id="portfolio">
-                <h2>Mes Projets</h2>
+                <div class="portfolio__title">
+                    <h2>Mes Projets</h2>
+                    <div id="modifier__button">
+                        <i class="fa-regular fa-pen-to-square"></i>
+                        modifier
+                    </div>
+                </div>
                 <div class="filters"></div>
                 <div class="gallery"></div>
             </section>
@@ -95,6 +101,9 @@
                     <div class="upload__area">
                         <div class="upload__rectangle">
                             <div id="uploaded__image__container"></div>
+                            <div class="uploaded__image__container__icon">
+                                <i class="fa-regular fa-image"></i>
+                            </div>
                             <input type="file" id="image__input" accept="image/*" style="display: none" />
                             <label for="image__input" id="upload__label" class="upload__button">+ Ajouter photo</label>
                             <p id="upload__info">jpg, png : 4mo max</p>
@@ -105,7 +114,7 @@
                             <label for="categorie">Catégorie</label>
                             <select name="categorie" id="categorie"></select>
                         </form>
-                        <div id="validate__projet">
+                        <div id="validate__project">
                             <input type="submit" value="Valider" />
                         </div>
                     </div>

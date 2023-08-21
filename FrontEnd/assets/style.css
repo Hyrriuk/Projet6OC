@@ -184,6 +184,12 @@ li:hover {
 #introduction figure {
     flex: 1;
 }
+
+.modifier__under__image {
+    margin-left: 10%;
+    margin-top: 10px;
+    cursor: pointer;
+}
 #introduction img {
     display: block;
     margin: auto;
@@ -210,6 +216,7 @@ li:hover {
     align-items: center;
     margin-bottom: 1em;
     cursor: pointer;
+    margin: 0;
 }
 .gallery {
     width: 100%;
@@ -275,7 +282,7 @@ footer nav ul {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    margin: 51px;
+    margin: 40px;
 }
 
 .filters button {
@@ -384,8 +391,14 @@ a {
     position: relative;
 }
 
+.modal__content h2 {
+    font-family: Work Sans;
+    color: black;
+    padding-top: 20px;
+}
+
 .close__button {
-    color: #aaa;
+    color: black;
     position: absolute;
     top: 10px;
     right: 10px;
@@ -394,10 +407,13 @@ a {
     cursor: pointer;
 }
 
-#add__photo__form input {
-    height: 51px;
+#open__add__photo__form input {
+    height: 36px;
+    width: 237px;
     border: none;
     cursor: pointer;
+    margin-bottom: 20px;
+    margin-top: 25px;
 }
 
 #delete__gallery__text {
@@ -441,30 +457,31 @@ a {
     flex-wrap: wrap;
     justify-content: center;
     width: 60%;
-    padding-bottom: 47px;
-    padding-top: 47px;
+    padding-bottom: 30px;
+    padding-top: 30px;
     border-bottom: solid #b3b3b3;
 }
 
 .project__list div {
-    width: calc(20% - 20px);
+    width: calc(20% - 12px);
     max-width: 100%;
     height: auto;
-    margin: 10px;
+    margin: 6px;
     position: relative;
+    box-sizing: border-box;
 }
 
 .project__list img {
     max-width: 100%;
     height: auto;
-    margin: 10px;
+    margin: 6px;
     position: relative;
 }
 
 .project__list i {
     position: absolute;
-    top: 12px;
-    right: -8px;
+    top: 8px;
+    right: -3px;
     color: white;
     cursor: pointer;
     background-color: black;
@@ -534,7 +551,7 @@ a {
 
 .add__photo__modal__content {
     position: absolute;
-    top: 50%;
+    top: 25%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: white;

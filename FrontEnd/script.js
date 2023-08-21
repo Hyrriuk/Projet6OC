@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const publierButton = document.getElementById("modifier__button");
     const modal = document.getElementById("modal");
     const closeModalButton = document.querySelector(".close__button");
-    const addPhotoButtonFirstModal = document.getElementById("add__photo__form");
+    const addPhotoButtonFirstModal = document.getElementById("open__add__photo__form");
     const addPhotoModal = document.getElementById("add__photo__modal");
     const validateProject = document.getElementById("validate__project");
     const closeModalButtonAddPhotoModal = addPhotoModal.querySelector(".close__button");
@@ -44,6 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
     async function buildGallery() {
         // Supprime le contenu existant dans la galerie
         gallery.innerHTML = "";
+        filters.innerHTML = "";
 
         // Récupère les projets depuis l'API en utilisant fetchProjects()
         const projects = await fetchProjects();
@@ -158,6 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .then((response) => {
                 if (response.ok) {
                     // Projet supprimé avec succès, mettre à jour la liste des projets dans la modale
+                    buildGallery();
                     updateProjectListInModal();
                 } else {
                     throw new Error("Erreur lors de la suppression du projet");
@@ -194,6 +196,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     projectContainer.setAttribute("data-project-id", project.id);
                 });
             })
+
             .catch((error) => {
                 console.error("Erreur lors de la récupération des projets :", error);
             });
@@ -204,6 +207,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         publierButton.addEventListener("click", () => {
             updateProjectListInModal();
+            buildGallery();
             modal.style.display = "block";
         });
 
@@ -238,7 +242,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Gérer l'événement de changement de fichier
-    imageInput.addEventListener("input", (event) => {
+    imageInput.addEventListener("change", (event) => {
         const selectedImage = event.target.files[0];
         if (selectedImage) {
             const uploadedImage = document.createElement("img");
@@ -263,7 +267,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const title = document.getElementById("title").value;
         const categoryId = document.getElementById("categorie").value;
         const selectedImage = imageInput.files[0];
-
         const projectData = new FormData();
         projectData.append("title", title);
         projectData.append("image", selectedImage);
@@ -282,7 +285,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 throw new Error("Erreur lors de l'ajout du projet");
             }
 
+            // Réinitialise les champs du formulaire
+            document.getElementById("title").value = "";
+            document.getElementById("categorie").selectedIndex = 0;
+            imageInput.value = null;
+            uploadedImageContainer.innerHTML = "";
+            uploadIcon.style.display = "block";
+            uploadLabel.style.display = "block";
+            uploadInfo.style.display = "block";
+
             addPhotoModal.style.display = "none";
+            buildGallery();
         } catch (error) {
             console.error("Erreur : ", error);
         }
@@ -314,8 +327,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (event.target === modal) {
             modal.style.display = "none";
         }
-
-        console.log(event.target);
 
         if (event.target === addPhotoModal) {
             addPhotoModal.style.display = "none";

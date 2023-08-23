@@ -186,9 +186,14 @@ li:hover {
 }
 
 .modifier__under__image {
+    display: none;
     margin-left: 10%;
     margin-top: 10px;
     cursor: pointer;
+}
+
+#modifier__button {
+    display: none;
 }
 #introduction img {
     display: block;
@@ -602,6 +607,13 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.error__message {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    color: red;
 }
 
 #validate__project {

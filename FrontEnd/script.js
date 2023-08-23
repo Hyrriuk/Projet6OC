@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const modeAdmin = document.querySelector(".mode__edition__bar");
     const loginButton = document.getElementById("login__button");
     const publierButton = document.getElementById("modifier__button");
+    const publierButtonTwo = document.querySelector(".modifier__under__image");
     const modal = document.getElementById("modal");
     const closeModalButton = document.querySelector(".close__button");
     const addPhotoButtonFirstModal = document.getElementById("open__add__photo__form");
@@ -16,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const uploadLabel = document.getElementById("upload__label");
     const uploadInfo = document.getElementById("upload__info");
     const uploadedImageContainer = document.getElementById("uploaded__image__container");
+    const validateError = document.querySelector(".error__message");
 
     // Variable pour stocker le filtre actif, initialise avec "Tous"
     let activeFilter = "Tous";
@@ -223,6 +225,17 @@ document.addEventListener("DOMContentLoaded", () => {
         closeModalButtonAddPhotoModal.addEventListener("click", () => {
             addPhotoModal.style.display = "none";
             modal.style.display = "block";
+            document.getElementById("title").value = "";
+            document.getElementById("categorie").selectedIndex = 0;
+            imageInput.value = null;
+            uploadedImageContainer.innerHTML = "";
+            uploadIcon.style.display = "block";
+            uploadLabel.style.display = "block";
+            uploadInfo.style.display = "block";
+            validateError.style.display = "none";
+            validateProject.classList.remove("shake");
+
+            addPhotoModal.style.display = "none";
         });
 
         loginButton.innerHTML = "logout";
@@ -232,6 +245,9 @@ document.addEventListener("DOMContentLoaded", () => {
             // Recharger la page
             location.reload();
         });
+
+        publierButton.style.display = "block";
+        publierButtonTwo.style.display = "block";
     } else {
         modeAdmin.style.display = "none"; // Cacher la barre de mode édition
 
@@ -293,11 +309,14 @@ document.addEventListener("DOMContentLoaded", () => {
             uploadIcon.style.display = "block";
             uploadLabel.style.display = "block";
             uploadInfo.style.display = "block";
+            validateError.style.display = "none";
+            validateProject.classList.remove("shake");
 
             addPhotoModal.style.display = "none";
             buildGallery();
         } catch (error) {
-            console.error("Erreur : ", error);
+            validateError.style.display = "flex";
+            validateProject.classList.add("shake");
         }
     });
 
